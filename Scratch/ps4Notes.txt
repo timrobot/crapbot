@@ -1,0 +1,15 @@
+sudo apt-get python3
+
+#install ds4 to connect controller to bluetooth
+sudo pip install ds4drv
+
+#install python library to read ps4 controls
+sudo apt-get install python-pygame
+
+#run ds4 to connect to bluetooth
+sudo ds4drv
+
+#links for PWM output
+https://elinux.org/Jetson/PWM
+https://devtalk.nvidia.com/default/topic/899535
+https://devtalk.nvidia.com/default/topic/1051014/jetson-nano/pwm-pins-and-channels/
