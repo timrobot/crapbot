@@ -1,24 +1,16 @@
+/*
+        Arduino Brushless Motor Control
+     by Dejan, https://howtomechatronics.com
+*/
+#include <Servo.h>
+Servo ESC;     // create servo object to control the ESC
+int potValue;  // value from the analog pin
 void setup() {
-  // start serial port at 9600 bps:
-  Serial.begin(9600);
-  // initialize digital pin LED_BUILTIN as an output.
-  pinMode(LED_BUILTIN, OUTPUT);
-  while (!Serial) {
-    ; // wait for serial port to connect.
-  }
-
+  // Attach the ESC on pin 9
+  ESC.attach(9,1000,2000); // (pin, min pulse width, max pulse width in microseconds) 
 }
-
 void loop() {
-  char buffer[16];
-  // if we get a command, turn the LED on or off:
-  if (Serial.available() > 0) {
-    int size = Serial.readBytesUntil('\n', buffer, 12);
-    if (buffer[0] == 'Y') {
-      digitalWrite(LED_BUILTIN, HIGH);
-    }
-    if (buffer[0] == 'N') {
-      digitalWrite(LED_BUILTIN, LOW);
-    }
-  }
+  potValue = analogRead(A0);   // reads the value of the potentiometer (value between 0 and 1023)
+  potValue = map(potValue, 0, 1023, 0, 180);   // scale it to use it with the servo library (value between 0 and 180)
+  ESC.write(potValue);    // Send the signal to the ESC
 }
