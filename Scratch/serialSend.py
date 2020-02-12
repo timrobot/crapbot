@@ -1,9 +1,11 @@
 import serial
+import glob
 
-with serial.Serial('/dev/ttyACM0', 9600, timeout=10) as ser:
-    while True:
-        led_on = input('Do you want the LED on? ')[0]
-        if led_on in 'yY':
-            ser.write(bytes('YES\n','utf-8'))
-        if led_on in 'Nn':
-            ser.write(bytes('NO\n','utf-8'))
+devices = [x for x in filter(lambda t: "ttyACM" in t, glob.glob("/dev/*"))]
+#arduino_name = devices[0]
+
+#with serial.Serial(arduino_name, 57600, timeout=10) as ser:
+while True:
+    led_on = input('Do you want the LED on? ')
+    print(led_on)
+    #ser.write(bytes(str(chr(ord(led_on) - ord('0'))), 'utf-8'))

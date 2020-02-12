@@ -1,0 +1,5 @@
+import subprocess
+
+
+subprocess.run("sudo -H python2 controller_test.py")
+#subprocess.run("sudo -H python3 serialSend.py")

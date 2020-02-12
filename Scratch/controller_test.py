@@ -36,6 +36,12 @@ while not done:
             pwmSteering = i
         if abs(throttle-iratio)<0.02:
             pwmThrottle = i
+    pwmThrottle = pwmThrottle * 0.66
+    pwmThrottle = pwmThrottle + 22
+    pwmThrottle = int(pwmThrottle)
+    isReverse = joystick.get_axis(3)
+    if(isReverse > 0):
+        pwmThrottle = 11
     print("Steering: " + str(pwmSteering) + " Throttle: " + str(pwmThrottle))
     time.sleep(0.05)
 pygame.quit()
