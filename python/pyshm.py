@@ -3,7 +3,7 @@ import os
 import numpy as np
 
 # careful! we do not dynamically find the path, so do not move this file
-lib = ctypes.cdll.LoadLibrary("../cc/build/libpyshm.so")
+lib = ctypes.cdll.LoadLibrary("../build/libpyshm.so")
 lib.create_shm.restype = ctypes.c_int
 lib.access_shm.restype = ctypes.c_int
 lib.val0.restype = ctypes.c_int

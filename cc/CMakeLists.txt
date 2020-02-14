@@ -1,4 +1,3 @@
-cmake_minimum_required(VERSION 3.10)
 find_package(OpenCV REQUIRED)
 
 include_directories(
@@ -6,10 +5,6 @@ include_directories(
 
 add_definitions(
   ${OpenCV_DEFINITIONS})
-
-#add_executable(view-cam view-cam.cc)
-#target_link_libraries(view-cam
-#  ${OpenCV_LIBRARIES})
 
 add_library(pyshm SHARED
   pyshm.cc)
