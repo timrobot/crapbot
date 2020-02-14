@@ -11,9 +11,9 @@ def stopme(sig, _):
   done = True
 signal.signal(signal.SIGTERM, stopme)
 
-# create pipeline to the controller
+# create pipeline to the ps4 gamepad
 pyshm.create_shm()
-child_proc = subprocess.Popen("sudo python2 ps4_interface.py".split())
+child_proc = subprocess.Popen("sudo python2 ps4gamepad_interface.py".split())
 
 # attach the camera and arduino
 cam = FastCam()
