@@ -8,7 +8,8 @@ lib.create_shm.restype = ctypes.c_int
 lib.access_shm.restype = ctypes.c_int
 lib.val0.restype = ctypes.c_int
 lib.val1.restype = ctypes.c_int
-lib.set_vals.argtypes = [ctypes.c_int, ctypes.c_int]
+lib.autonomous.restype = ctypes.c_int
+lib.set_vals.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_int]
 
 def create_shm():
   if not lib.create_shm():
@@ -25,7 +26,7 @@ def delete_shm():
   lib.delete_shm()
 
 def vals():
-  return lib.val0(), lib.val1()
+  return lib.val0(), lib.val1(), lib.autonomous()
 
-def set_vals(a, b):
-  lib.set_vals(a, b)
+def set_vals(steer, speed, autonomous=False):
+  lib.set_vals(steer, speed, autonomous)

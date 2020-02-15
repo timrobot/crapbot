@@ -7,6 +7,7 @@
 static int shmvalid;
 static int shmid;
 static int *values;
+static int _autonomous;
 
 int create_shm() {
   shmvalid = 1;
@@ -70,7 +71,12 @@ int val1() {
   return values[1];
 }
 
-void set_vals(int a, int b) {
-  values[0] = a;
-  values[1] = b;
+int autonomous() {
+  return _autonomous;
+}
+
+void set_vals(int steer, int speed, int _auto) {
+  values[0] = steer;
+  values[1] = speed;
+  _autonomous = _auto;
 }
