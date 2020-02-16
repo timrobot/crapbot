@@ -31,7 +31,7 @@ while not done:
     action = agent(cam.color)
     steer = np.clip(int((action[0] + 1.0) * 45.0), 0, 90)
     speed = np.clip(int((action[1] + 1.0) * 45.0), 0, 90)
-  arduino.write(steer, speed, throttleHz=100.0)
+  arduino.write(steer, speed)
 
 # clean up by closing the arduino, child process and deleting shared memory
 # the camera will close by itself

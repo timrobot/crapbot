@@ -10,11 +10,15 @@ signal.signal(signal.SIGTERM, stopme)
 
 arduino = rccomms.RCComms()
 arduino.connect()
+i = 40
+dir_ = 1
 while not done:
-  for i in range(40,121):
-    steer, speed = i, i
-    print(steer,speed)
-    arduino.write(steer, speed, throttleHz=100.0)
-    time.sleep(0.9)
+  steer, speed = i, i
+  arduino.write(steer, speed)
+  time.sleep(0.5)
+  i += dir_
+  if i == 40 or i == 120:
+    dir_ *= -1
+
 arduino.disconnect()
 time.sleep(1)

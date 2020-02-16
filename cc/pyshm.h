@@ -1,4 +1,4 @@
-#pragma pyshm_h
+#pragma once
 
 extern "C" {
 
