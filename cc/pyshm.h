@@ -8,6 +8,7 @@ void deaccess_shm();
 void delete_shm();
 int val0();
 int val1();
-void set_vals(int a, int b);
+int autonomous();
+void set_vals(int steer, int speed, int _auto);
 
 }
