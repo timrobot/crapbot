@@ -51,6 +51,9 @@ while not done:
   pwmThrottle = pwmThrottle * 0.66
   pwmThrottle = pwmThrottle + 22
   pwmThrottle = int(pwmThrottle)
+  pwmSteering = pwmSteering * 0.8
+  pwmSteering = pwmSteering + 40
+  pwmSteering = 80 - (pwmSteering - 80)
   if(isReverse > 0):
       pwmThrottle = 11
 

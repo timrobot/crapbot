@@ -3,7 +3,7 @@ import os
 import numpy as np
 
 # careful! we do not dynamically find the path, so do not move this file
-lib = ctypes.cdll.LoadLibrary("../build/libpyshm.so")
+lib = ctypes.cdll.LoadLibrary("../build/cc/libpyshm.so")
 lib.create_shm.restype = ctypes.c_int
 lib.access_shm.restype = ctypes.c_int
 lib.val0.restype = ctypes.c_int
@@ -29,4 +29,4 @@ def vals():
   return lib.val0(), lib.val1(), lib.autonomous()
 
 def set_vals(steer, speed, autonomous=False):
-  lib.set_vals(steer, speed, autonomous)
+  lib.set_vals(int(steer), int(speed), int(autonomous))

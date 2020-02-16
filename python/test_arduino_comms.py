@@ -15,7 +15,7 @@ dir_ = 1
 while not done:
   steer, speed = i, i
   arduino.write(steer, speed)
-  time.sleep(0.5)
+  time.sleep(0.01)
   i += dir_
   if i == 40 or i == 120:
     dir_ *= -1

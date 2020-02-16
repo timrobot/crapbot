@@ -1,12 +1,16 @@
 import serial
-import time
 import glob
-import rccar_serial
+import ctypes
+import os
+
+# careful! we do not dynamically find the path, so do not move this file
+lib = ctypes.cdll.LoadLibrary("../build/cc/libserial.so")
+lib.rccar_connect.restype = ctypes.c_int
+lib.rccar_write.argtypes = [ctypes.c_int, ctypes.c_int]
 
 class RCComms:
   def __init__(self):
     self._connected = False
-    self.sendtime = None
     self._speed = None
     self._steer = None
 
@@ -15,11 +19,11 @@ class RCComms:
 
   def disconnect(self):
     if self._connected:
-      rccar_serial.disconnect()
+      lib.rccar_disconnect()
       self._connected = False
 
   def connect(self):
-    if rccar_serial.connect():
+    if lib.rccar_connect():
       self._connected = True
     else:
       raise Exception("Cannot connect to the arduino")
@@ -28,7 +32,7 @@ class RCComms:
     return self._connected
 
   def write(self, steer=45, speed=22):
-    rccar_serial.write(steer, speed)
+    lib.rccar_write(steer, speed)
     self._steer, self._speed = steer, speed
 
   def vals(self):

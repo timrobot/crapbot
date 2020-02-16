@@ -287,9 +287,9 @@ char *serial_read(serial_t *connection) {
  */
 void serial_write(serial_t *connection, const char *message) {
   if (connection->fd != -1) {
-    //sprintf(interbuf, "%s", message);
+    sprintf(interbuf, "%s", message);
     /* sending a null terminated string causes error, so just send length */
-    if (write(connection->fd, message, strlen(interbuf)) != -1) {
+    if (write(connection->fd, interbuf, strlen(interbuf)) != -1) {
       //printf("[SERIAL] write [%s][%zu]: %s\n",
       //    connection->port, strlen(interbuf) + 1, interbuf);
     }
@@ -315,17 +315,18 @@ void serial_disconnect(serial_t *connection) {
   connection->fd = -1;
 }
 
-int rccar_connect(void) {
+int rccar_connect() {
   memset(writemsg, 0, sizeof(writemsg));
-  return serial_connect(&arduino, NULL, 57600);
+  return serial_connect(&arduino, "/dev/ttyACM0", 57600) != -1;
 }
 
 void rccar_write(int steer, int speed) {
   writemsg[0] = steer;
   writemsg[1] = speed | 0x80;
+  writemsg[2] = 0;
   serial_write(&arduino, writemsg);
 }
 
-void rccar_disconnect(void) {
+void rccar_disconnect() {
   serial_disconnect(&arduino);
 }
