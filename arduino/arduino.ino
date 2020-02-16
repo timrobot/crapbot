@@ -1,31 +1,30 @@
 #include <Servo.h>
 
 Servo steer;     // create servo object to control the ESC
-Servo speed;
+Servo motor;
 static int steer_dir;
-static int speed_vel;
+static int motor_vel;
 
 void setup() {
-  steer.attach(7, 10000, 20000);
+  steer.attach(9, 10000, 20000);
   steer.write(90);
-  speed.attach(9, 10000, 20000); // (pin, min pulse width, max pulse width in microseconds)
-  speed.write(44);
+  motor.attach(11, 10000, 20000); // (pin, min pulse width, max pulse width in microseconds)
+  motor.write(44);
   Serial.begin(57600);
 }
 
 void loop() {
-  if (Serial.available()) {
+  if (Serial.available() > 0) {
     char c = Serial.read();
     int val = (int)(c & 0x7F);
-    /*
-    int flg = (c & 0x80) >> 7;
+    int flg = (int)((c & 0x80) >> 7);
     if (flg == 0) {
       steer_dir = val;
     }
     if (flg == 1) {
-      speed_vel = val;
-    }*/
-    speed_vel = val * 2;
+      motor_vel = val * 2;
+    }
   }
-  speed.write(speed_vel);
+  steer.write(steer_dir);
+  motor.write(motor_vel);
 }

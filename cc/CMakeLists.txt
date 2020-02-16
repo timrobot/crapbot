@@ -10,3 +10,6 @@ add_library(pyshm SHARED
   pyshm.cc)
 target_link_libraries(pyshm
   ${OpenCV_LIBRARIES})
+
+add_library(serial SHARED
+  serial.c)
